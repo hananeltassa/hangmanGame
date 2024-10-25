@@ -7,7 +7,8 @@ const words = ['liverpool', 'mancity', 'youtube', 'bootcamp', 'javascript']
 // we will store the word that the player will have to guess
 let selectedWord = '';
 let correctGuesses = []
-
+let incorrectGuesses = 0; 
+const maxIncorrectGuesses = 6;
 
 
 function initGame(){
@@ -61,11 +62,28 @@ function handleGuess (letter){
             }
         }
     } else {
+        incorrectGuesses++;
         // Letter incorrect 
-        console.log("Incorrect guess");
+        console.log("Incorrect guesses " + incorrectGuesses);
+
+        // Check if the player has lost
+        if (incorrectGuesses >= maxIncorrectGuesses) {
+            alert("Game Over! The word was: " + selectedWord);
+            resetGame(); 
+        }
+    }
+
+    // Check if the player has won
+    if (!correctGuesses.includes('_')) {
+        alert("Congratulations! You've guessed the word: " + selectedWord);
+        resetGame();
     }
     answers(); // To update our display with new guesses
 }
 
+function resetGame() {
+    incorrectGuesses = 0; 
+    initGame(); //reset
+}
 
 initGame(); // starting the game
