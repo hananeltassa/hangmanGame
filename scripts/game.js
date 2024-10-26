@@ -5,6 +5,7 @@
 const words = ['liverpool', 'mancity', 'youtube', 'bootcamp', 'javascript']
 
 // we will store the word that the player will have to guess
+
 let selectedWord = '';
 let correctGuesses = []
 let incorrectGuesses = 0; 
@@ -71,6 +72,10 @@ function handleGuess (letter){
             alert("Game Over! The word was: " + selectedWord);
             resetGame(); 
         }
+        else{
+            //update hangman
+            drawHangman();
+        }
     }
 
     // Check if the player has won
@@ -83,6 +88,7 @@ function handleGuess (letter){
 
 function resetGame() {
     incorrectGuesses = 0; 
+    resetHangman();
     initGame(); //reset
 }
 
